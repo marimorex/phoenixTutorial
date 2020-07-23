@@ -16,7 +16,8 @@ defmodule BusiApiWeb.BusinessView do
       name: business.name,
       description: business.description,
       tag: business.tag,
-      date: NaiveDateTime.to_string(business.inserted_at)
+      date: NaiveDateTime.to_string(business.inserted_at),
+      year: business.year
     }
   end
 end

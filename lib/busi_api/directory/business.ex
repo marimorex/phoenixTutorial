@@ -4,9 +4,10 @@ defmodule BusiApi.Directory.Business do
 
   schema "businesses" do
     field :description, :string
-    field :name, :string
-    field :tag, :string
-
+    field :name,        :string
+    field :tag,         :string
+    field :year,        :integer
+    #has_many :colaborators, Business.Colaborators
     timestamps()
   end
 
