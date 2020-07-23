@@ -17,6 +17,6 @@ Repo.insert! %Business{name: "Company 2", description: "Short description ...", 
 Repo.insert! %Business{name: "Company 3", description: "Short description ...", tag: "Accounting",   year: 2000 }
 
 alias BusiApi.Directory.Colaborator
-Repo.insert! %Colaborator{name: "Jhon", lastname: "Doe",   email: "some@gmail.com", business_id: 5 }
-Repo.insert! %Colaborator{name: "Jane", lastname: "Dow",   email: "some@gmail.com", business_id: 6 }
-Repo.insert! %Colaborator{name: "Some", lastname: "Other", email: "some@gmail.com", business_id: 7 }
+Repo.insert! %Colaborator{name: "Jhon", lastname: "Doe",   email: "some@gmail.com", business_id: 1 }
+Repo.insert! %Colaborator{name: "Jane", lastname: "Dow",   email: "some@gmail.com", business_id: 2 }
+Repo.insert! %Colaborator{name: "Some", lastname: "Other", email: "some@gmail.com", business_id: 3 }
