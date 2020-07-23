@@ -7,6 +7,7 @@ defmodule BusiApi.Directory do
   alias BusiApi.Repo
 
   alias BusiApi.Directory.Business
+  alias BusiApi.Directory.Colaborator
 
   @doc """
   Returns the list of businesses.
@@ -19,6 +20,15 @@ defmodule BusiApi.Directory do
   """
   def list_businesses do
     Repo.all(Business)
+  end
+
+  def get_businesess_collaborators(id,year) do
+    query = from b in Business,
+                where: b.id == ^id and b.year == ^year,
+                join: c in Colaborator,
+                on: c.business_id == b.id,
+                select: c
+    Repo.all(query)
   end
 
   @doc """
@@ -101,4 +111,14 @@ defmodule BusiApi.Directory do
   def change_business(%Business{} = business, attrs \\ %{}) do
     Business.changeset(business, attrs)
   end
+
+  def get_businesess_collaborators(id,year) do
+    query = from b in Business,
+                where: b.id == ^id and b.year == ^year,
+                join: c in Colaborator,
+                on: c.business_id == b.id,
+                select: c
+    Repo.all(query)
+  end
+
 end

@@ -7,7 +7,7 @@ defmodule BusiApi.Directory.Business do
     field :name,        :string
     field :tag,         :string
     field :year,        :integer
-    #has_many :colaborators, Business.Colaborators
+    has_many :colaborators, BusiApi.Directory.Colaborator
     timestamps()
   end
 

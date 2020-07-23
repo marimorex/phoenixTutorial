@@ -21,7 +21,9 @@ defmodule BusiApiWeb.Router do
   scope "/api", BusiApiWeb do
     pipe_through :api
     resources "/businesses", BusinessController, except: [:new, :edit]
+    get "/get_collaborators_businesess_by_year", ColaboratorController, :get_businesess_collaborators
   end
+
 
   # Enables LiveDashboard only for development
   #

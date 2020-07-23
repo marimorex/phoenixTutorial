@@ -3,6 +3,7 @@ defmodule BusiApiWeb.BusinessController do
 
   alias BusiApi.Directory
   alias BusiApi.Directory.Business
+  alias BusiApi.Directory.Colaborator
 
   action_fallback BusiApiWeb.FallbackController
 
@@ -39,5 +40,10 @@ defmodule BusiApiWeb.BusinessController do
     with {:ok, %Business{}} <- Directory.delete_business(business) do
       send_resp(conn, :no_content, "")
     end
+  end
+
+  def get_businesess_collaborators(conn, %{"id" => id, "year" => year}) do
+    colaborators = Directory.get_businesess_collaborators(id, year)
+    render(conn, "colaborator.json", colaborators: colaborators)
   end
 end
