@@ -15,6 +15,22 @@ defmodule BusiApiWeb.ColaboratorView do
         id: colaborator.id,
         name: colaborator.name,
         lastname: colaborator.lastname,
+        email: colaborator.email,
+        business:
+        %{
+          id: colaborator.business.id,
+          name: colaborator.business.name,
+          description: colaborator.business.description,
+          tag: colaborator.business.tag,
+          year: colaborator.business.year
+        }
+      }
+    end
+    def render("colaboratorFromBusiness.json", %{colaborator: colaborator}) do
+      %{
+        id: colaborator.id,
+        name: colaborator.name,
+        lastname: colaborator.lastname,
         email: colaborator.email
       }
     end

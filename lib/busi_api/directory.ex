@@ -9,6 +9,7 @@ defmodule BusiApi.Directory do
   alias BusiApi.Directory.Business
   alias BusiApi.Directory.Colaborator
 
+  @spec list_businesses :: any
   @doc """
   Returns the list of businesses.
 
@@ -19,17 +20,12 @@ defmodule BusiApi.Directory do
 
   """
   def list_businesses do
-    Repo.all(Business)
-  end
-
-  def get_businesess_collaborators(id,year) do
     query = from b in Business,
-                where: b.id == ^id and b.year == ^year,
-                join: c in Colaborator,
-                on: c.business_id == b.id,
-                select: c
+            join: c in assoc(b, :colaborators),
+            preload: [colaborators: c]
     Repo.all(query)
   end
+
 
   @doc """
   Gets a single business.
@@ -112,12 +108,20 @@ defmodule BusiApi.Directory do
     Business.changeset(business, attrs)
   end
 
+  @spec get_businesess_collaborators(any, any) :: any
   def get_businesess_collaborators(id,year) do
     query = from b in Business,
                 where: b.id == ^id and b.year == ^year,
                 join: c in Colaborator,
                 on: c.business_id == b.id,
                 select: c
+    Repo.all(query)
+  end
+
+  def list_collaborators do
+    query = from c in Colaborator,
+            join: b in assoc(c, :business),
+            preload: [business: b]
     Repo.all(query)
   end
 

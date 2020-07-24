@@ -1,14 +1,14 @@
 defmodule BusiApiWeb.BusinessController do
   use BusiApiWeb, :controller
-
   alias BusiApi.Directory
   alias BusiApi.Directory.Business
-  alias BusiApi.Directory.Colaborator
+  #alias BusiApi.Directory.Colaborator
 
   action_fallback BusiApiWeb.FallbackController
 
   def index(conn, _params) do
     businesses = Directory.list_businesses()
+    |>IO.inspect()
     render(conn, "index.json", businesses: businesses)
   end
 
@@ -26,6 +26,7 @@ defmodule BusiApiWeb.BusinessController do
     render(conn, "show.json", business: business)
   end
 
+  @spec update(any, map) :: any
   def update(conn, %{"id" => id, "business" => business_params}) do
     business = Directory.get_business!(id)
 
@@ -34,16 +35,12 @@ defmodule BusiApiWeb.BusinessController do
     end
   end
 
+  @spec delete(any, map) :: any
   def delete(conn, %{"id" => id}) do
     business = Directory.get_business!(id)
 
     with {:ok, %Business{}} <- Directory.delete_business(business) do
       send_resp(conn, :no_content, "")
     end
-  end
-
-  def get_businesess_collaborators(conn, %{"id" => id, "year" => year}) do
-    colaborators = Directory.get_businesess_collaborators(id, year)
-    render(conn, "colaborator.json", colaborators: colaborators)
   end
 end
