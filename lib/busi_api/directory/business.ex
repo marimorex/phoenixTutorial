@@ -13,7 +13,7 @@ defmodule BusiApi.Directory.Business do
 
   def changeset(business, attrs) do
     business
-    |> cast(attrs, [:name, :description, :tag])
-    |> validate_required([:name, :description, :tag])
+    |> cast(attrs, [:name, :description, :tag, :year])
+    |> validate_required([:name, :description, :tag, :year])
   end
 end
