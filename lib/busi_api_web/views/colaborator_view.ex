@@ -3,14 +3,14 @@ defmodule BusiApiWeb.ColaboratorView do
     alias BusiApiWeb.ColaboratorView
 
     def render("index.json", %{colaborators: colaborators}) do
-      %{data: render_many(colaborators, ColaboratorView, "colaborator.json")}
+      %{data: render_many(colaborators, ColaboratorView, "colaborator_assoc.json")}
     end
 
     def render("show.json", %{colaborator: colaborator}) do
-      %{data: render_one(colaborator, ColaboratorView, "colaborator.json")}
+      %{data: render_one(colaborator, ColaboratorView, "colaborator_assoc.json")}
     end
 
-    def render("colaborator.json", %{colaborator: colaborator}) do
+    def render("colaborator_assoc.json", %{colaborator: colaborator}) do
       %{
         id: colaborator.id,
         name: colaborator.name,
@@ -26,7 +26,7 @@ defmodule BusiApiWeb.ColaboratorView do
         }
       }
     end
-    def render("colaboratorFromBusiness.json", %{colaborator: colaborator}) do
+    def render("colaborator.json", %{colaborator: colaborator}) do
       %{
         id: colaborator.id,
         name: colaborator.name,

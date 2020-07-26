@@ -11,11 +11,6 @@ defmodule BusiApi.Directory.Business do
     timestamps()
   end
 
-  @spec changeset(
-          {map, map} | %{:__struct__ => atom | %{__changeset__: map}, optional(atom) => any},
-          :invalid | %{optional(:__struct__) => none, optional(atom | binary) => any}
-        ) :: Ecto.Changeset.t()
-  @doc false
   def changeset(business, attrs) do
     business
     |> cast(attrs, [:name, :description, :tag])

@@ -21,7 +21,7 @@ defmodule BusiApiWeb.BusinessView do
       year: business.year,
       collaborators:
       %{
-        data: render_many(business.colaborators, ColaboratorView, "colaboratorFromBusiness.json")
+        data: render_many(business.colaborators, ColaboratorView, "colaborator.json")
        }
     }
   end

@@ -26,7 +26,6 @@ defmodule BusiApiWeb.BusinessController do
     render(conn, "show.json", business: business)
   end
 
-  @spec update(any, map) :: any
   def update(conn, %{"id" => id, "business" => business_params}) do
     business = Directory.get_business!(id)
 
@@ -35,7 +34,6 @@ defmodule BusiApiWeb.BusinessController do
     end
   end
 
-  @spec delete(any, map) :: any
   def delete(conn, %{"id" => id}) do
     business = Directory.get_business!(id)
 

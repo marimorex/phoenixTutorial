@@ -10,10 +10,10 @@ defmodule BusiApi.Directory.Colaborator do
     timestamps()
   end
 
-  @doc false
   def changeset(colaborator, attrs) do
     colaborator
-    |> cast(attrs, [:name, :lastname, :email])
-    |> validate_required([:name, :lastname, :email])
+    |> cast(attrs, [:name, :lastname, :email, :business_id])
+    |> validate_required([:name, :lastname, :email, :business_id])
+    |> assoc_constraint(:business)
   end
 end
