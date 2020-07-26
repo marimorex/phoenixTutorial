@@ -1,13 +1,14 @@
 defmodule BusiApiWeb.BusinessController do
   use BusiApiWeb, :controller
-
   alias BusiApi.Directory
   alias BusiApi.Directory.Business
+  #alias BusiApi.Directory.Colaborator
 
   action_fallback BusiApiWeb.FallbackController
 
   def index(conn, _params) do
     businesses = Directory.list_businesses()
+    |>IO.inspect()
     render(conn, "index.json", businesses: businesses)
   end
 
@@ -16,7 +17,7 @@ defmodule BusiApiWeb.BusinessController do
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.business_path(conn, :show, business))
-      |> render("show.json", business: business)
+      |> render("business.json", business: business)
     end
   end
 

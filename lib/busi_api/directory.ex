@@ -17,9 +17,15 @@ defmodule BusiApi.Directory do
       [%Business{}, ...]
 
   """
-  def list_businesses do
-    Repo.all(Business)
-  end
+  # def list_businesses do
+  #   query = from b in Business,
+  #           join: c in assoc(b, :colaborators),
+  #           preload: [colaborators: c]
+  #   Repo.all(query)
+  # end
+
+  def list_businesses, do: Repo.all(Business) |> Repo.preload([:colaborators])
+
 
   @doc """
   Gets a single business.
@@ -35,7 +41,7 @@ defmodule BusiApi.Directory do
       ** (Ecto.NoResultsError)
 
   """
-  def get_business!(id), do: Repo.get!(Business, id)
+  def get_business!(id), do: Repo.get!(Business, id) |> Repo.preload([:colaborators])
 
   @doc """
   Creates a business.
@@ -101,4 +107,41 @@ defmodule BusiApi.Directory do
   def change_business(%Business{} = business, attrs \\ %{}) do
     Business.changeset(business, attrs)
   end
+
+  @spec get_businesess_collaborators(any, any) :: any
+  def get_businesess_collaborators(id,year) do
+    query = from b in Business,
+                where: b.id == ^id and b.year == ^year,
+                join: c in Colaborator,
+                on: c.business_id == b.id,
+                select: c
+    Repo.all(query)
+  end
+
+  alias BusiApi.Directory.Colaborator
+
+  def list_collaborators, do: Repo.all(Colaborator) |> Repo.preload([:business])
+
+  def get_collaborator!(id), do: Repo.get!(Colaborator, id) |> Repo.preload([:business])
+
+  def create_collaborator(attrs \\ %{}) do
+    %Colaborator{}
+    |> Colaborator.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def update_collaborator(%Colaborator{} = colaborator, attrs) do
+    colaborator
+    |> Colaborator.changeset(attrs)
+    |> Repo.update()
+  end
+
+  def delete_collaborator(%Colaborator{} = colaborator) do
+    Repo.delete(colaborator)
+  end
+
+  def change_collaborator(%Colaborator{} = colaborator, attrs \\ %{}) do
+    Colaborator.changeset(colaborator, attrs)
+  end
+
 end
